@@ -13,6 +13,6 @@ export class AccordionHeader extends HTMLElement {
   }
 
   connectedCallback() {
-    this.addEventListener("click", () => this.onClick());
+    this.addEventListener("click", this.onClick);
   }
 }

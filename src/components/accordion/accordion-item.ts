@@ -12,28 +12,9 @@ export class AccordionItem extends HTMLElement {
     return ["open"];
   }
 
-  get isOpen() {
-    return this.hasAttribute("open");
-  }
-
-  showContent() {
-    this.content.setAttribute("visible", "true");
-    this.content.style.maxHeight = `${this.content.scrollHeight}px`;
-  }
-
-  hideContent() {
-    this.content.setAttribute("visible", "false");
-    this.content.style.maxHeight = "0";
-  }
-
-  updateContent() {
-    const isOpen = this.isOpen;
-    isOpen ? this.showContent() : this.hideContent();
-  }
-
   attributeChangedCallback(name: string) {
     if (name === "open") {
-      this.updateContent();
+      this.content.toggleAttribute("visible");
     }
   }
 

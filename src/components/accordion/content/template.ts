@@ -9,7 +9,7 @@ const styles = `
           transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
           padding: 0 10px;
         }
-        :host([visible="true"]) {
+        :host([visible]) {
           opacity: 1;
           padding: 10px;
         }
