@@ -1,30 +1,38 @@
+import { ACCORDION_ITEM_TAG, ACCORDION_TOGGLE_EVENT } from "./config";
+
+type Mode = "multiple" | "single";
+
 export class AccordionList extends HTMLElement {
-  get isSingleOpen() {
-    return this.hasAttribute("single-open");
+
+  get mode(): Mode {
+    return (this.getAttribute("mode") || "multiple") as Mode;
   }
 
-  getAccordionItems() {
-    return this.querySelectorAll("accordion-item");
+  get accordionItems() {
+    return this.querySelectorAll(ACCORDION_ITEM_TAG);
   }
 
   getClosestAccordionItem(event: Event) {
-    return (event.target as HTMLElement).closest("accordion-item");
+    return (event.target as HTMLElement).closest(ACCORDION_ITEM_TAG);
   }
 
-  closeAccordionItems(targetItem: Element) {
-    this.getAccordionItems().forEach((item) => {
+  closeAccordionItems(targetItem: HTMLElement) {
+    const accordionItems = this.accordionItems;
+    accordionItems.forEach((item) => {
       if (item !== targetItem) {
         item.removeAttribute("open");
       }
     });
   }
 
+  toggle(event: Event) {
+    if (this.mode === "single") {
+      const targetItem = this.getClosestAccordionItem(event) as HTMLElement;
+      this.closeAccordionItems(targetItem);
+    }
+  }
+
   connectedCallback() {
-    this.addEventListener("toggle", (event: Event) => {
-      const targetItem = this.getClosestAccordionItem(event);
-      if (this.isSingleOpen) {
-        this.closeAccordionItems(targetItem as Element);
-      }
-    });
+    this.addEventListener(ACCORDION_TOGGLE_EVENT, (event: Event) => this.toggle(event));
   }
 }

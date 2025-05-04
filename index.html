@@ -5,17 +5,54 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
+    <style>
+      accordion-list{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      accordion-item[open] accordion-header span{
+        transform: rotate(180deg);
+        font-size: 30px;
+      }
+      accordion-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      accordion-header span{
+        transition: transform 0.3s ease, font-size 0.3s ease;
+      }
+      accordion-content{
+        background-color: aqua;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      <accordion-list single-open>
+      <accordion-list mode="single">
         <accordion-item>
-          <accordion-header>Section 1</accordion-header>
+          <accordion-header>
+              <p>Header 1</p>
+              <span>+</span>
+          </accordion-header>
           <accordion-content>Content 1</accordion-content>
         </accordion-item>
         <accordion-item>
-          <accordion-header>Section 2</accordion-header>
-          <accordion-content>Content 2</accordion-content>
+          <accordion-header>
+              <p>Header 1</p>
+              <span>+</span>
+          </accordion-header>
+          <accordion-content>Content 1</accordion-content>
+        </accordion-item>
+        <accordion-item>
+          <accordion-header>
+              <p>Header 1</p>
+              <span>+</span>
+          </accordion-header>
+          <accordion-content>Content 1</accordion-content>
         </accordion-item>
       </accordion-list>
     </div>

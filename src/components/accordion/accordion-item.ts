@@ -1,25 +1,43 @@
+import { ACCORDION_CONTENT_TAG, ACCORDION_TOGGLE_EVENT } from "./config";
+
 export class AccordionItem extends HTMLElement {
-    connectedCallback() {
-      this.addEventListener('toggle', () => {
-        const isOpen = this.hasAttribute('open');
-        this.toggleAttribute('open', !isOpen);
-        this.dispatchEvent(new CustomEvent('item-toggle', { bubbles: true, composed: true }));
-      });
-    }
+  private content: HTMLElement;
   
-    static get observedAttributes() {
-      return ['open'];
-    }
-  
-    attributeChangedCallback(name: string) {
-      if (name === 'open') {
-        this.updateContent();
-      }
-    }
-    updateContent() {
-      const content = this.querySelector('accordion-content');
-      if (content) {
-        content.setAttribute('visible', this.hasAttribute('open') ? 'true' : 'false');
-      }
+  constructor() {
+    super();
+    this.content = this.querySelector(ACCORDION_CONTENT_TAG) as HTMLElement;
+  }
+
+  static get observedAttributes() {
+    return ["open"];
+  }
+
+  get isOpen() {
+    return this.hasAttribute("open");
+  }
+
+  showContent() {
+    this.content.setAttribute("visible", "true");
+    this.content.style.maxHeight = `${this.content.scrollHeight}px`;
+  }
+
+  hideContent() {
+    this.content.setAttribute("visible", "false");
+    this.content.style.maxHeight = "0";
+  }
+
+  updateContent() {
+    const isOpen = this.isOpen;
+    isOpen ? this.showContent() : this.hideContent();
+  }
+
+  attributeChangedCallback(name: string) {
+    if (name === "open") {
+      this.updateContent();
     }
   }
+
+  connectedCallback() {
+    this.addEventListener(ACCORDION_TOGGLE_EVENT, () => this.toggleAttribute("open"));
+  }
+}
