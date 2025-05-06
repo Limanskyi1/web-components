@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,55 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
     <style>
-      accordion-list{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      accordion-item[open] accordion-header span{
-        transform: rotate(180deg);
-        font-size: 30px;
-      }
-      accordion-header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      accordion-header span{
-        transition: transform 0.3s ease, font-size 0.3s ease;
-      }
-      accordion-content{
-        background-color: aqua;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        margin-block-start: 0;
+        margin-block-end: 0;
       }
     </style>
   </head>
   <body>
     <div id="app">
-      <accordion-list mode="single">
-        <accordion-item>
-          <accordion-header>
-              <p>Header 1</p>
-              <span>+</span>
-          </accordion-header>
-          <accordion-content>Content 1</accordion-content>
-        </accordion-item>
-        <accordion-item>
-          <accordion-header>
-              <p>Header 1</p>
-              <span>+</span>
-          </accordion-header>
-          <accordion-content>Content 1</accordion-content>
-        </accordion-item>
-        <accordion-item>
-          <accordion-header>
-              <p>Header 1</p>
-              <span>+</span>
-          </accordion-header>
-          <accordion-content>Content 1</accordion-content>
-        </accordion-item>
-      </accordion-list>
+      <ui-select>
+        <option value="1" selected>Option One</option>
+        <option value="2">Option Two</option>
+        <option value="3">Option Three</option>
+      <ui-select>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
